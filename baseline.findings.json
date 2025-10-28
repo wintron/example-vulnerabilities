@@ -1,0 +1,25 @@
+{
+  "test": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "attrs": {
+      "subject": {},
+      "subjectLocators": null,
+      "orgId": "00000000-0000-0000-0000-000000000000",
+      "groupId": null,
+      "tenantId": null,
+      "jobId": "00000000-0000-0000-0000-000000000000",
+      "interactionId": null,
+      "createdAt": "2025-10-28T16:43:26.68831-05:00",
+      "updatedAt": "2025-10-28T16:43:26.688312-05:00",
+      "jobState": "FINISHED",
+      "errors": null,
+      "warnings": null,
+      "outcome": null,
+      "outcomeReason": null,
+      "failingLocalPolicy": false,
+      "config": null,
+      "source": "OTHER"
+    }
+  },
+  "findings": null
+}

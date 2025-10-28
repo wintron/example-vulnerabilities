@@ -1,0 +1,106 @@
+{
+  "test": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "attrs": {
+      "subject": {},
+      "subjectLocators": null,
+      "orgId": "00000000-0000-0000-0000-000000000000",
+      "groupId": null,
+      "tenantId": null,
+      "jobId": "00000000-0000-0000-0000-000000000000",
+      "interactionId": null,
+      "createdAt": "2025-10-28T16:40:26.464163-05:00",
+      "updatedAt": "2025-10-28T16:40:26.464163-05:00",
+      "jobState": "FINISHED",
+      "errors": null,
+      "warnings": null,
+      "outcome": null,
+      "outcomeReason": null,
+      "failingLocalPolicy": false,
+      "config": null,
+      "source": "OTHER"
+    }
+  },
+  "findings": [
+    {
+      "id": "f55cf247-49ec-459f-90cc-bf10d9fcfe10",
+      "attrs": {
+        "projectKey": "UNDEFINED-15655e78-f602-420c-a9df-1ecb813899da",
+        "assetKey": "90c0f8e1-6dd9-48cf-8471-278dcfdb6b7a",
+        "title": "Code Injection",
+        "description": "## Details\n\nA secure code injection attack occurs when the attacker exploits an existing input processing vulnerability, passing special characters and code directly to a web-based application or site. The code is then executed, potentially granting the user system access to export sensitive data, to install malware, or even to move laterally and to exploit other systems in the trusted internal network environment. While code injection attacks can take place in several ways, the common factor is allowing the user to submit executable code to the application. The most common forms of code injection are SQL injection (server side) and cross-site scripting (XSS) (client side).\n\n## Best practices for prevention\n- Never trust user input. Assume any input may transmit harmful values.\n- Apply least privilege principle (for example, limit users to read only wherever possible).\n- Avoid passing raw user input directly to functions; use parameterized queries to extract data first.\n- Sanitize user input strings of special characters such as ?, \u0026, /, \u003c, \u003e, and quotation marks.\n- Use whitelisting of known good values.\n- Validate user input against expected response types.\n- Escape shell commands with functions such as shlex for Python, or escapeshellarg for PHP.\n- Remember that code injection can take place on multiple fronts: GET and POST requests, but also cookies and HTTP headers.\n- Ensure up-to-date patching across all systems to remediate known vulnerabilities so these cannot be exploited by code injection.\n- Educate all team members on safe data handling procedures to prevent attacks.",
+        "type": "SAST",
+        "tool": "SnykCode",
+        "policyModifications": null,
+        "evidence": [
+          {}
+        ],
+        "locations": [
+          {}
+        ],
+        "createdAt": "2025-10-28T16:40:26.464359-05:00",
+        "updatedAt": "2025-10-28T16:40:26.46436-05:00",
+        "test": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "attrs": null
+        },
+        "problems": null,
+        "problemRefs": [
+          {},
+          {}
+        ],
+        "assetId": null,
+        "projectId": null,
+        "policyIds": null,
+        "breachedLocalPolicyConfig": null,
+        "breachedPolicyIds": null,
+        "effectiveSeverity": "HIGH",
+        "risk": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "attrs": null
+        },
+        "fix": null
+      }
+    },
+    {
+      "id": "0c7a1e3f-b9d3-4325-ab42-f56ead0fb9eb",
+      "attrs": {
+        "projectKey": "UNDEFINED-73caf15e-bcd2-43ad-b521-d5ca29ebc57b",
+        "assetKey": "5e7fe714-e8ce-43c8-91b9-7d57890e2844",
+        "title": "Information Exposure - X-Powered-By Header",
+        "description": "## Details\n\nSensitive data includes: personally identifiable information (PII) of employees, customers, users, or other third parties; financial information; code; intellectual property; or protected network information such as passwords. Exposure of sensitive information to an unauthorized actor occurs when any party who does not require this information for business purposes can remove this information from the secure network.\nConsequences of exposure can include holding it for ransom payment, identity theft, or access to other internal network resources-along with financial loss due to regulatory fines, court settlements, or cost to restore compromised systems. As most attackers aim to extract sensitive information, this CWE only describes exploits that take advantage of vulnerabilities related to how data is handled: the management, storage, transfer, or removal of sensitive information.\n\n## Best practices for prevention\n- Encrypt data at all times, whether in transit or at rest.\n- When transporting data, always use a secure protocol such as TLS.\n- Before collecting PII or financial information, consider whether there is a true business need for this information; similarly, before storing the data, ensure that there is an ongoing business need.\n- Classify all incoming data according to privacy and security guidelines to improve awareness of sensitive data.\n- Ensure that caching is disabled for all transactions involving sensitive information.\n- Store passwords with secure, salted hashing functions.\n- Apply a network-wide least-privilege policy so sensitive data is provided only to users with business need to know.",
+        "type": "SAST",
+        "tool": "SnykCode",
+        "policyModifications": null,
+        "evidence": [
+          {}
+        ],
+        "locations": [
+          {}
+        ],
+        "createdAt": "2025-10-28T16:40:26.464379-05:00",
+        "updatedAt": "2025-10-28T16:40:26.464379-05:00",
+        "test": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "attrs": null
+        },
+        "problems": null,
+        "problemRefs": [
+          {},
+          {}
+        ],
+        "assetId": null,
+        "projectId": null,
+        "policyIds": null,
+        "breachedLocalPolicyConfig": null,
+        "breachedPolicyIds": null,
+        "effectiveSeverity": "MEDIUM",
+        "risk": {
+          "id": "00000000-0000-0000-0000-000000000000",
+          "attrs": null
+        },
+        "fix": null
+      }
+    }
+  ]
+}
