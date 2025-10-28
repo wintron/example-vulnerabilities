@@ -8,7 +8,7 @@
       "groupId": null,
       "tenantId": null,
       "jobId": "00000000-0000-0000-0000-000000000000",
-      "interactionId": null,
+      "interactionId": "urn:snyk:interaction:6363b42b-f1eb-48d0-939b-cc26b5c6cb2e",
       "createdAt": "2025-10-28T16:27:47.645484-05:00",
       "updatedAt": "2025-10-28T16:27:47.645484-05:00",
       "jobState": "FINISHED",
