@@ -1,1 +1,936 @@
-{"$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json","version": "2.1.0","runs": [{"tool": {"driver" : {"name" : "SnykCode","semanticVersion" : "1.1300.2","version" : "1.1300.2","informationUri" : "https://docs.snyk.io/","rules" : [{"id": "javascript/CodeInjection","name": "CodeInjection","shortDescription": {"text": "Code Injection"},"defaultConfiguration": {"level": "error"},"help": {"markdown": "## Details\n\nA secure code injection attack occurs when the attacker exploits an existing input processing vulnerability, passing special characters and code directly to a web-based application or site. The code is then executed, potentially granting the user system access to export sensitive data, to install malware, or even to move laterally and to exploit other systems in the trusted internal network environment. While code injection attacks can take place in several ways, the common factor is allowing the user to submit executable code to the application. The most common forms of code injection are SQL injection (server side) and cross-site scripting (XSS) (client side).\n\n## Best practices for prevention\n- Never trust user input. Assume any input may transmit harmful values.\n- Apply least privilege principle (for example, limit users to read only wherever possible).\n- Avoid passing raw user input directly to functions; use parameterized queries to extract data first.\n- Sanitize user input strings of special characters such as ?, &, /, <, >, and quotation marks.\n- Use whitelisting of known good values.\n- Validate user input against expected response types.\n- Escape shell commands with functions such as shlex for Python, or escapeshellarg for PHP.\n- Remember that code injection can take place on multiple fronts: GET and POST requests, but also cookies and HTTP headers.\n- Ensure up-to-date patching across all systems to remediate known vulnerabilities so these cannot be exploited by code injection.\n- Educate all team members on safe data handling procedures to prevent attacks.","text": ""},"properties": {"tags": ["javascript","CodeInjection","Security","SourceServer","SourceHttpBody","Taint"],"categories": ["Security"],"exampleCommitFixes": [{"commitURL": "https://github.com/lvn/botstrap/commit/aafeaca53e8d89eb950d8e9c3af8874dc90686ec?diff=split#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346L-1","lines": [{"line": "var config = require(configFile);\n","lineNumber": 17,"lineChange": "removed"},{"line": "var config = JSON.parse(fs.readFileSync(configFile));\n","lineNumber": 17,"lineChange": "added"}]},{"commitURL": "https://github.com/noppa/ng-hot-reload/commit/5de61299a0a7aa602fe015ac9f2ff3af3f798348?diff=split#diff-8f9d1530fa118465c523a517c5f4cac4ec173f17b820514034dc39e588415f63L-1","lines": [{"line": "var update = event.data;\r\n","lineNumber": 4,"lineChange": "removed"},{"line": "new Function(update)();\r\n","lineNumber": 5,"lineChange": "removed"},{"line": "var data = event.data ? JSON.parse(event.data) : {};\r\n","lineNumber": 4,"lineChange": "added"},{"line": "console.log('msg', data);\r\n","lineNumber": 5,"lineChange": "added"},{"line": "if (data.message === 'reload') {\r\n","lineNumber": 6,"lineChange": "added"},{"line": "    var script = document.createElement('script');\r\n","lineNumber": 7,"lineChange": "added"},{"line": "    var query = '?t=' + Date.now();\r\n","lineNumber": 8,"lineChange": "added"},{"line": "    script.src = 'http://localhost:' + options.port + '/' + data.src + query;\r\n","lineNumber": 9,"lineChange": "added"},{"line": "    document.body.appendChild(script);\r\n","lineNumber": 10,"lineChange": "added"},{"line": "}\r\n","lineNumber": 11,"lineChange": "added"}]},{"commitURL": "https://github.com/hizzgdev/jsmind/commit/8063742e591d7765a6c96a29b91af1ac4adeeba8?diff=split#diff-053107ea442600706ba811ac9afc51a58f7b9c86fa9f374b46c5c3c29a58287aL-1","lines": [{"line": "var data = eval('('+xhr.responseText+')');\n","lineNumber": 876,"lineChange": "removed"},{"line": "var data = jm.util.json.string2json(xhr.responseText);\n","lineNumber": 876,"lineChange": "added"},{"line": "if(data != null){\n","lineNumber": 877,"lineChange": "added"},{"line": "    callback(data);\n","lineNumber": 878,"lineChange": "none"},{"line": "}else{\n","lineNumber": 879,"lineChange": "added"},{"line": "    callback(xhr.responseText);\n","lineNumber": 880,"lineChange": "added"},{"line": "}\n","lineNumber": 881,"lineChange": "added"}]}],"exampleCommitDescriptions": [],"precision": "very-high","repoDatasetSize": 149,"cwe": ["CWE-94"]}},{"id": "javascript/DisablePoweredBy","name": "DisablePoweredBy","shortDescription": {"text": "Information Exposure - X-Powered-By Header"},"defaultConfiguration": {"level": "warning"},"help": {"markdown": "## Details\n\nSensitive data includes: personally identifiable information (PII) of employees, customers, users, or other third parties; financial information; code; intellectual property; or protected network information such as passwords. Exposure of sensitive information to an unauthorized actor occurs when any party who does not require this information for business purposes can remove this information from the secure network.\nConsequences of exposure can include holding it for ransom payment, identity theft, or access to other internal network resources-along with financial loss due to regulatory fines, court settlements, or cost to restore compromised systems. As most attackers aim to extract sensitive information, this CWE only describes exploits that take advantage of vulnerabilities related to how data is handled: the management, storage, transfer, or removal of sensitive information.\n\n## Best practices for prevention\n- Encrypt data at all times, whether in transit or at rest.\n- When transporting data, always use a secure protocol such as TLS.\n- Before collecting PII or financial information, consider whether there is a true business need for this information; similarly, before storing the data, ensure that there is an ongoing business need.\n- Classify all incoming data according to privacy and security guidelines to improve awareness of sensitive data.\n- Ensure that caching is disabled for all transactions involving sensitive information.\n- Store passwords with secure, salted hashing functions.\n- Apply a network-wide least-privilege policy so sensitive data is provided only to users with business need to know.","text": ""},"properties": {"tags": ["javascript","DisablePoweredBy","Security"],"categories": ["Security"],"exampleCommitFixes": [{"commitURL": "https://github.com/lucasweng/yelp-camp/commit/f4e907734aea3ec98000d61f5d49c729a95cb77c?diff=split#diff-e07d531ac040ce3f40e0ce632ac2a059d7cd60f20e61f78268ac3be015b3b28fL-1","lines": [{"line": "      app            = express(),\n","lineNumber": 1,"lineChange": "none"},{"line": "      bodyParser     = require(\"body-parser\"),\n","lineNumber": 2,"lineChange": "none"},{"line": "      mongoose       = require(\"mongoose\"),\n","lineNumber": 3,"lineChange": "none"},{"line": "      helmet         = require(\"helmet\"),\n","lineNumber": 4,"lineChange": "added"},{"line": "      flash          = require(\"connect-flash\"),\n","lineNumber": 5,"lineChange": "none"},{"line": "      session        = require(\"express-session\"),\n","lineNumber": 6,"lineChange": "none"},{"line": "      moment         = require(\"moment\"),\n","lineNumber": 7,"lineChange": "none"},{"line": "      passport       = require(\"passport\"),\n","lineNumber": 8,"lineChange": "none"},{"line": "      LocalStrategy  = require(\"passport-local\"),\n","lineNumber": 9,"lineChange": "none"},{"line": "      methodOverride = require(\"method-override\"),\n","lineNumber": 10,"lineChange": "none"},{"line": "      User           = require(\"./models/user\");\n","lineNumber": 11,"lineChange": "none"},{"line": "\n","lineNumber": 12,"lineChange": "none"},{"line": "// requiring routes     \n","lineNumber": 13,"lineChange": "none"},{"line": "const indexRoute      = require(\"./routes/index\"),\n","lineNumber": 14,"lineChange": "none"},{"line": "      campgroundRoute = require(\"./routes/campgrounds\"),\n","lineNumber": 15,"lineChange": "none"},{"line": "      commentRoute    = require(\"./routes/comments\"),\n","lineNumber": 16,"lineChange": "none"},{"line": "      userRoute       = require(\"./routes/user\"),\n","lineNumber": 17,"lineChange": "none"},{"line": "      passwordRoute   = require(\"./routes/password\");\n","lineNumber": 18,"lineChange": "none"},{"line": "\n","lineNumber": 19,"lineChange": "none"},{"line": "// connect to the DB\n","lineNumber": 20,"lineChange": "none"},{"line": "let url = process.env.DATABASEURL || \"mongodb://localhost/yelp_camp_v13\"; // fallback in case global var not working\n","lineNumber": 21,"lineChange": "none"},{"line": "mongoose.connect(url, {useMongoClient: true});\n","lineNumber": 22,"lineChange": "none"},{"line": "\n","lineNumber": 23,"lineChange": "none"},{"line": "app.set(\"view engine\", \"ejs\");\n","lineNumber": 24,"lineChange": "none"},{"line": "app.use(helmet());\n","lineNumber": 25,"lineChange": "added"}]},{"commitURL": "https://github.com/infor-design/enterprise/commit/20888f176d6bccc41b009a54b2d47a2b29845db3?diff=split#diff-322f0482bd28fc40f84fcb0aaf208fef7fb63082d462cf02d11f46e59c531c24L-1","lines": [{"line": "const app = express();\n","lineNumber": 9,"lineChange": "none"},{"line": "const BASE_PATH = process.env.BASEPATH || '/';\n","lineNumber": 10,"lineChange": "none"},{"line": "const packageJSON = getJSONFile('../../../package.json');\n","lineNumber": 11,"lineChange": "none"},{"line": "\n","lineNumber": 12,"lineChange": "none"},{"line": "app.set('view engine', 'html');\n","lineNumber": 13,"lineChange": "none"},{"line": "app.set('views', path.resolve(__dirname, 'views'));\n","lineNumber": 14,"lineChange": "none"},{"line": "app.set('basepath', BASE_PATH);\n","lineNumber": 15,"lineChange": "none"},{"line": "app.disable('x-powered-by');\n","lineNumber": 16,"lineChange": "added"}]},{"commitURL": "https://github.com/galtenberg/evernote-random/commit/32109271055df8a60bf4dafe289b717dbb950305?diff=split#diff-bcb729747c92e72c12e4590f736a334041a572c429756da8af60b6ab89c6be79L-1","lines": [{"line": "const csp = require('helmet-csp')\n","lineNumber": 5,"lineChange": "added"},{"line": "\n","lineNumber": 6,"lineChange": "none"},{"line": "const app = express()\n","lineNumber": 7,"lineChange": "none"},{"line": "\n","lineNumber": 8,"lineChange": "none"},{"line": "app.use(morgan(':remote-addr - :remote-user [:date[clf]] \":method :url HTTP/:http-version\" :status :res[content-length] :response-time ms'));\n","lineNumber": 9,"lineChange": "none"},{"line": "\n","lineNumber": 10,"lineChange": "none"},{"line": "// parse application/x-www-form-urlencoded\n","lineNumber": 11,"lineChange": "none"},{"line": "app.use(bodyParser.urlencoded({ extended: false }))\n","lineNumber": 12,"lineChange": "none"},{"line": "// json parser\n","lineNumber": 13,"lineChange": "none"},{"line": "app.use(bodyParser.json())\n","lineNumber": 14,"lineChange": "none"},{"line": "// Serve static assets\n","lineNumber": 15,"lineChange": "none"},{"line": "app.use(express.static(path.resolve(__dirname, '..', 'build')))\n","lineNumber": 15,"lineChange": "none"},{"line": "\n","lineNumber": 17,"lineChange": "none"},{"line": "// Re-enable on glitch.com\n","lineNumber": 18,"lineChange": "none"},{"line": "// Always return the main index.html, so react-router render the route in the client\n","lineNumber": 19,"lineChange": "none"},{"line": "//app.get('*', (req, res) => {\n","lineNumber": 19,"lineChange": "none"},{"line": "  //res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));\n","lineNumber": 21,"lineChange": "none"},{"line": "//})\n","lineNumber": 22,"lineChange": "none"},{"line": "\n","lineNumber": 23,"lineChange": "none"},{"line": "app.use(cookieSession({\n","lineNumber": 24,"lineChange": "none"},{"line": "  name: 'evernoteSolitaire',\n","lineNumber": 25,"lineChange": "none"},{"line": "  secret: 'evernote-sandbox-secret',\n","lineNumber": 26,"lineChange": "none"},{"line": "  maxAge: 30 * 24 * 60 * 60 * 1000 // 1 month\n","lineNumber": 27,"lineChange": "none"},{"line": "}))\n","lineNumber": 28,"lineChange": "none"},{"line": "\n","lineNumber": 29,"lineChange": "none"},{"line": "//require('./api/experiment')(app)\n","lineNumber": 29,"lineChange": "none"},{"line": "require('./api/auth')(app)\n","lineNumber": 30,"lineChange": "none"},{"line": "require('./api/notes')(app)\n","lineNumber": 31,"lineChange": "none"},{"line": "\n","lineNumber": 32,"lineChange": "none"},{"line": "const PORT = process.env.PORT || 8000\n","lineNumber": 33,"lineChange": "removed"},{"line": "app.use(bodyParser.json({\n","lineNumber": 33,"lineChange": "added"},{"line": "  type: ['json', 'application/csp-report']\n","lineNumber": 34,"lineChange": "added"},{"line": "}))\n","lineNumber": 35,"lineChange": "added"},{"line": "\n","lineNumber": 36,"lineChange": "added"},{"line": "app.post('/report-violation', function (req, res) {\n","lineNumber": 37,"lineChange": "added"},{"line": "  if (req.body) {\n","lineNumber": 38,"lineChange": "added"},{"line": "    console.log('CSP Violation: ', req.body)\n","lineNumber": 39,"lineChange": "added"},{"line": "  } else {\n","lineNumber": 40,"lineChange": "added"},{"line": "    console.log('CSP Violation: No data received!')\n","lineNumber": 41,"lineChange": "added"},{"line": "  }\n","lineNumber": 42,"lineChange": "added"},{"line": "  res.status(204).end()\n","lineNumber": 43,"lineChange": "added"},{"line": "})\n","lineNumber": 44,"lineChange": "added"},{"line": "\n","lineNumber": 45,"lineChange": "added"},{"line": "const PORT = 8000 //process.env.PORT || 8000\n","lineNumber": 46,"lineChange": "added"},{"line": "\n","lineNumber": 47,"lineChange": "added"},{"line": "app.use(csp({\n","lineNumber": 48,"lineChange": "added"},{"line": "  directives: {\n","lineNumber": 49,"lineChange": "added"},{"line": "    defaultSrc: [\"'self'\"],\n","lineNumber": 50,"lineChange": "added"},{"line": "    scriptSrc: [\"'unsafe-inline'\"],\n","lineNumber": 51,"lineChange": "added"},{"line": "    styleSrc: [\"'unsafe-inline'\"],\n","lineNumber": 52,"lineChange": "added"},{"line": "    reportUri: '/report-violation',\n","lineNumber": 53,"lineChange": "added"},{"line": "    upgradeInsecureRequests: true\n","lineNumber": 54,"lineChange": "added"},{"line": "  },\n","lineNumber": 55,"lineChange": "added"},{"line": "  reportOnly: false,\n","lineNumber": 56,"lineChange": "added"},{"line": "  loose: true,\n","lineNumber": 57,"lineChange": "added"},{"line": "  setAllHeaders: true,\n","lineNumber": 58,"lineChange": "added"},{"line": "  browserSniff: false\n","lineNumber": 59,"lineChange": "added"},{"line": "}))\n","lineNumber": 60,"lineChange": "added"}]}],"exampleCommitDescriptions": [],"precision": "very-high","repoDatasetSize": 416,"cwe": ["CWE-200"]}}]}},"results": [{"ruleId": "javascript/CodeInjection","ruleIndex": 0,"level": "error","message": {"text":"Unsanitized input from the HTTP request body flows into eval, where it is executed as JavaScript code. This may result in a Code Injection vulnerability.","markdown":"Unsanitized input from {0} {1} into {2}, where it is executed as JavaScript code. This may result in a Code Injection vulnerability.","arguments": ["[the HTTP request body](0)","[flows](1),(2),(3),(4),(5)","[eval](6)"]},"locations": [{  "id": 0,  "physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":10,  "endLine":10,  "startColumn":20,  "endColumn":24}  }}],"fingerprints": {"identity": "90c0f8e1-6dd9-48cf-8471-278dcfdb6b7a","0": "a0bdd2eb1e090056f2bc36b417df036c3db49bbc489b6798cc81f971011b5cd6","1": "e0fda459.4773f344.8b18f948.93be4c77.53ad0462.8020cfdf.ea4b1c47.cde67692.f759b1f9.4773f344.aa4dda5f.08906714.fd1fa73f.8431f2ca.83265159.89d75565","snyk/asset/finding/v1": "90c0f8e1-6dd9-48cf-8471-278dcfdb6b7a"},"codeFlows": [{"threadFlows": [{"locations": [{"location": {"id": 0,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":7,  "endLine":7,  "startColumn":20,  "endColumn":24}}}},{"location": {"id": 1,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":7,  "endLine":7,  "startColumn":20,  "endColumn":24}}}},{"location": {"id": 2,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":7,  "endLine":7,  "startColumn":16,  "endColumn":24}}}},{"location": {"id": 3,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":7,  "endLine":7,  "startColumn":25,  "endColumn":29}}}},{"location": {"id": 4,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":7,  "endLine":7,  "startColumn":9,  "endColumn":13}}}},{"location": {"id": 5,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":10,  "endLine":10,  "startColumn":25,  "endColumn":29}}}},{"location": {"id": 6,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":10,  "endLine":10,  "startColumn":20,  "endColumn":24}}}}]}]}],"properties": {"isAutofixable": true,"priorityScore": 850,"priorityScoreFactors": [  {"label": true,"type": "hotFileSource"  },  {"label": true,"type": "fixExamples"  }]}},{"ruleId": "javascript/DisablePoweredBy","ruleIndex": 1,"level": "warning","message": {"text":"Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.","markdown":"Disable X-Powered-By header for your {0} (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.","arguments": ["[Express app](0)"]},"locations": [{  "id": 0,  "physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":3,  "endLine":3,  "startColumn":13,  "endColumn":20}  }}],"fingerprints": {"snyk/asset/finding/v1": "5e7fe714-e8ce-43c8-91b9-7d57890e2844","identity": "5e7fe714-e8ce-43c8-91b9-7d57890e2844","0": "f11853d30cd2e9143640dffc671e5550a3be578b1febde0ab7fbc7fcb8220de3","1": "ae77ea27.4773f344.8b18f948.d7919eeb.a1fb1152.5fce695c.ea4b1c47.89d75565.ae77ea27.4773f344.aa4dda5f.d7919eeb.a1fb1152.5fce695c.60d372c8.89d75565"},"codeFlows": [{"threadFlows": [{"locations": [{"location": {"id": 0,"physicalLocation": {"artifactLocation": {  "uri": "vuln-eval.js",  "uriBaseId": "%SRCROOT%"},"region": {  "startLine":3,  "endLine":3,  "startColumn":13,  "endColumn":20}}}}]}]}],"properties": {"isAutofixable": true,"priorityScore": 600,"priorityScoreFactors": [  {"label": true,"type": "hotFileSource"  },  {"label": true,"type": "fixExamples"  }]}}],"properties": {"coverage": [{"files": 2,"isSupported": true,"lang": ".js","type": "SUPPORTED"}]},"automationDetails": {"id": "Snyk/Code/2025-10-28T21:25:59Z"}}]}
+{
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "SnykCode",
+          "semanticVersion": "1.1300.2",
+          "version": "1.1300.2",
+          "informationUri": "https://docs.snyk.io/",
+          "rules": [
+            {
+              "id": "javascript/CodeInjection",
+              "name": "CodeInjection",
+              "shortDescription": {
+                "text": "Code Injection"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "markdown": "## Details\n\nA secure code injection attack occurs when the attacker exploits an existing input processing vulnerability, passing special characters and code directly to a web-based application or site. The code is then executed, potentially granting the user system access to export sensitive data, to install malware, or even to move laterally and to exploit other systems in the trusted internal network environment. While code injection attacks can take place in several ways, the common factor is allowing the user to submit executable code to the application. The most common forms of code injection are SQL injection (server side) and cross-site scripting (XSS) (client side).\n\n## Best practices for prevention\n- Never trust user input. Assume any input may transmit harmful values.\n- Apply least privilege principle (for example, limit users to read only wherever possible).\n- Avoid passing raw user input directly to functions; use parameterized queries to extract data first.\n- Sanitize user input strings of special characters such as ?, &, /, <, >, and quotation marks.\n- Use whitelisting of known good values.\n- Validate user input against expected response types.\n- Escape shell commands with functions such as shlex for Python, or escapeshellarg for PHP.\n- Remember that code injection can take place on multiple fronts: GET and POST requests, but also cookies and HTTP headers.\n- Ensure up-to-date patching across all systems to remediate known vulnerabilities so these cannot be exploited by code injection.\n- Educate all team members on safe data handling procedures to prevent attacks.",
+                "text": ""
+              },
+              "properties": {
+                "tags": [
+                  "javascript",
+                  "CodeInjection",
+                  "Security",
+                  "SourceServer",
+                  "SourceHttpBody",
+                  "Taint"
+                ],
+                "categories": [
+                  "Security"
+                ],
+                "exampleCommitFixes": [
+                  {
+                    "commitURL": "https://github.com/lvn/botstrap/commit/aafeaca53e8d89eb950d8e9c3af8874dc90686ec?diff=split#diff-e727e4bdf3657fd1d798edcd6b099d6e092f8573cba266154583a746bba0f346L-1",
+                    "lines": [
+                      {
+                        "line": "var config = require(configFile);\n",
+                        "lineNumber": 17,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "var config = JSON.parse(fs.readFileSync(configFile));\n",
+                        "lineNumber": 17,
+                        "lineChange": "added"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/noppa/ng-hot-reload/commit/5de61299a0a7aa602fe015ac9f2ff3af3f798348?diff=split#diff-8f9d1530fa118465c523a517c5f4cac4ec173f17b820514034dc39e588415f63L-1",
+                    "lines": [
+                      {
+                        "line": "var update = event.data;\r\n",
+                        "lineNumber": 4,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "new Function(update)();\r\n",
+                        "lineNumber": 5,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "var data = event.data ? JSON.parse(event.data) : {};\r\n",
+                        "lineNumber": 4,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "console.log('msg', data);\r\n",
+                        "lineNumber": 5,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "if (data.message === 'reload') {\r\n",
+                        "lineNumber": 6,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    var script = document.createElement('script');\r\n",
+                        "lineNumber": 7,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    var query = '?t=' + Date.now();\r\n",
+                        "lineNumber": 8,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    script.src = 'http://localhost:' + options.port + '/' + data.src + query;\r\n",
+                        "lineNumber": 9,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    document.body.appendChild(script);\r\n",
+                        "lineNumber": 10,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "}\r\n",
+                        "lineNumber": 11,
+                        "lineChange": "added"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/hizzgdev/jsmind/commit/8063742e591d7765a6c96a29b91af1ac4adeeba8?diff=split#diff-053107ea442600706ba811ac9afc51a58f7b9c86fa9f374b46c5c3c29a58287aL-1",
+                    "lines": [
+                      {
+                        "line": "var data = eval('('+xhr.responseText+')');\n",
+                        "lineNumber": 876,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "var data = jm.util.json.string2json(xhr.responseText);\n",
+                        "lineNumber": 876,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "if(data != null){\n",
+                        "lineNumber": 877,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    callback(data);\n",
+                        "lineNumber": 878,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "}else{\n",
+                        "lineNumber": 879,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    callback(xhr.responseText);\n",
+                        "lineNumber": 880,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "}\n",
+                        "lineNumber": 881,
+                        "lineChange": "added"
+                      }
+                    ]
+                  }
+                ],
+                "exampleCommitDescriptions": [],
+                "precision": "very-high",
+                "repoDatasetSize": 149,
+                "cwe": [
+                  "CWE-94"
+                ]
+              }
+            },
+            {
+              "id": "javascript/DisablePoweredBy",
+              "name": "DisablePoweredBy",
+              "shortDescription": {
+                "text": "Information Exposure - X-Powered-By Header"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "markdown": "## Details\n\nSensitive data includes: personally identifiable information (PII) of employees, customers, users, or other third parties; financial information; code; intellectual property; or protected network information such as passwords. Exposure of sensitive information to an unauthorized actor occurs when any party who does not require this information for business purposes can remove this information from the secure network.\nConsequences of exposure can include holding it for ransom payment, identity theft, or access to other internal network resources-along with financial loss due to regulatory fines, court settlements, or cost to restore compromised systems. As most attackers aim to extract sensitive information, this CWE only describes exploits that take advantage of vulnerabilities related to how data is handled: the management, storage, transfer, or removal of sensitive information.\n\n## Best practices for prevention\n- Encrypt data at all times, whether in transit or at rest.\n- When transporting data, always use a secure protocol such as TLS.\n- Before collecting PII or financial information, consider whether there is a true business need for this information; similarly, before storing the data, ensure that there is an ongoing business need.\n- Classify all incoming data according to privacy and security guidelines to improve awareness of sensitive data.\n- Ensure that caching is disabled for all transactions involving sensitive information.\n- Store passwords with secure, salted hashing functions.\n- Apply a network-wide least-privilege policy so sensitive data is provided only to users with business need to know.",
+                "text": ""
+              },
+              "properties": {
+                "tags": [
+                  "javascript",
+                  "DisablePoweredBy",
+                  "Security"
+                ],
+                "categories": [
+                  "Security"
+                ],
+                "exampleCommitFixes": [
+                  {
+                    "commitURL": "https://github.com/lucasweng/yelp-camp/commit/f4e907734aea3ec98000d61f5d49c729a95cb77c?diff=split#diff-e07d531ac040ce3f40e0ce632ac2a059d7cd60f20e61f78268ac3be015b3b28fL-1",
+                    "lines": [
+                      {
+                        "line": "      app            = express(),\n",
+                        "lineNumber": 1,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      bodyParser     = require(\"body-parser\"),\n",
+                        "lineNumber": 2,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      mongoose       = require(\"mongoose\"),\n",
+                        "lineNumber": 3,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      helmet         = require(\"helmet\"),\n",
+                        "lineNumber": 4,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "      flash          = require(\"connect-flash\"),\n",
+                        "lineNumber": 5,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      session        = require(\"express-session\"),\n",
+                        "lineNumber": 6,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      moment         = require(\"moment\"),\n",
+                        "lineNumber": 7,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      passport       = require(\"passport\"),\n",
+                        "lineNumber": 8,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      LocalStrategy  = require(\"passport-local\"),\n",
+                        "lineNumber": 9,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      methodOverride = require(\"method-override\"),\n",
+                        "lineNumber": 10,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      User           = require(\"./models/user\");\n",
+                        "lineNumber": 11,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 12,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// requiring routes     \n",
+                        "lineNumber": 13,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "const indexRoute      = require(\"./routes/index\"),\n",
+                        "lineNumber": 14,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      campgroundRoute = require(\"./routes/campgrounds\"),\n",
+                        "lineNumber": 15,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      commentRoute    = require(\"./routes/comments\"),\n",
+                        "lineNumber": 16,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      userRoute       = require(\"./routes/user\"),\n",
+                        "lineNumber": 17,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "      passwordRoute   = require(\"./routes/password\");\n",
+                        "lineNumber": 18,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 19,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// connect to the DB\n",
+                        "lineNumber": 20,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "let url = process.env.DATABASEURL || \"mongodb://localhost/yelp_camp_v13\"; // fallback in case global var not working\n",
+                        "lineNumber": 21,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "mongoose.connect(url, {useMongoClient: true});\n",
+                        "lineNumber": 22,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 23,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.set(\"view engine\", \"ejs\");\n",
+                        "lineNumber": 24,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(helmet());\n",
+                        "lineNumber": 25,
+                        "lineChange": "added"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/infor-design/enterprise/commit/20888f176d6bccc41b009a54b2d47a2b29845db3?diff=split#diff-322f0482bd28fc40f84fcb0aaf208fef7fb63082d462cf02d11f46e59c531c24L-1",
+                    "lines": [
+                      {
+                        "line": "const app = express();\n",
+                        "lineNumber": 9,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "const BASE_PATH = process.env.BASEPATH || '/';\n",
+                        "lineNumber": 10,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "const packageJSON = getJSONFile('../../../package.json');\n",
+                        "lineNumber": 11,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 12,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.set('view engine', 'html');\n",
+                        "lineNumber": 13,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.set('views', path.resolve(__dirname, 'views'));\n",
+                        "lineNumber": 14,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.set('basepath', BASE_PATH);\n",
+                        "lineNumber": 15,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.disable('x-powered-by');\n",
+                        "lineNumber": 16,
+                        "lineChange": "added"
+                      }
+                    ]
+                  },
+                  {
+                    "commitURL": "https://github.com/galtenberg/evernote-random/commit/32109271055df8a60bf4dafe289b717dbb950305?diff=split#diff-bcb729747c92e72c12e4590f736a334041a572c429756da8af60b6ab89c6be79L-1",
+                    "lines": [
+                      {
+                        "line": "const csp = require('helmet-csp')\n",
+                        "lineNumber": 5,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 6,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "const app = express()\n",
+                        "lineNumber": 7,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 8,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(morgan(':remote-addr - :remote-user [:date[clf]] \":method :url HTTP/:http-version\" :status :res[content-length] :response-time ms'));\n",
+                        "lineNumber": 9,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 10,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// parse application/x-www-form-urlencoded\n",
+                        "lineNumber": 11,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(bodyParser.urlencoded({ extended: false }))\n",
+                        "lineNumber": 12,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// json parser\n",
+                        "lineNumber": 13,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(bodyParser.json())\n",
+                        "lineNumber": 14,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// Serve static assets\n",
+                        "lineNumber": 15,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(express.static(path.resolve(__dirname, '..', 'build')))\n",
+                        "lineNumber": 15,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 17,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// Re-enable on glitch.com\n",
+                        "lineNumber": 18,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "// Always return the main index.html, so react-router render the route in the client\n",
+                        "lineNumber": 19,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "//app.get('*', (req, res) => {\n",
+                        "lineNumber": 19,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "  //res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));\n",
+                        "lineNumber": 21,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "//})\n",
+                        "lineNumber": 22,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 23,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "app.use(cookieSession({\n",
+                        "lineNumber": 24,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "  name: 'evernoteSolitaire',\n",
+                        "lineNumber": 25,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "  secret: 'evernote-sandbox-secret',\n",
+                        "lineNumber": 26,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "  maxAge: 30 * 24 * 60 * 60 * 1000 // 1 month\n",
+                        "lineNumber": 27,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "}))\n",
+                        "lineNumber": 28,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 29,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "//require('./api/experiment')(app)\n",
+                        "lineNumber": 29,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "require('./api/auth')(app)\n",
+                        "lineNumber": 30,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "require('./api/notes')(app)\n",
+                        "lineNumber": 31,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 32,
+                        "lineChange": "none"
+                      },
+                      {
+                        "line": "const PORT = process.env.PORT || 8000\n",
+                        "lineNumber": 33,
+                        "lineChange": "removed"
+                      },
+                      {
+                        "line": "app.use(bodyParser.json({\n",
+                        "lineNumber": 33,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  type: ['json', 'application/csp-report']\n",
+                        "lineNumber": 34,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "}))\n",
+                        "lineNumber": 35,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 36,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "app.post('/report-violation', function (req, res) {\n",
+                        "lineNumber": 37,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  if (req.body) {\n",
+                        "lineNumber": 38,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    console.log('CSP Violation: ', req.body)\n",
+                        "lineNumber": 39,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  } else {\n",
+                        "lineNumber": 40,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    console.log('CSP Violation: No data received!')\n",
+                        "lineNumber": 41,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  }\n",
+                        "lineNumber": 42,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  res.status(204).end()\n",
+                        "lineNumber": 43,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "})\n",
+                        "lineNumber": 44,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 45,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "const PORT = 8000 //process.env.PORT || 8000\n",
+                        "lineNumber": 46,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "\n",
+                        "lineNumber": 47,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "app.use(csp({\n",
+                        "lineNumber": 48,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  directives: {\n",
+                        "lineNumber": 49,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    defaultSrc: [\"'self'\"],\n",
+                        "lineNumber": 50,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    scriptSrc: [\"'unsafe-inline'\"],\n",
+                        "lineNumber": 51,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    styleSrc: [\"'unsafe-inline'\"],\n",
+                        "lineNumber": 52,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    reportUri: '/report-violation',\n",
+                        "lineNumber": 53,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "    upgradeInsecureRequests: true\n",
+                        "lineNumber": 54,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  },\n",
+                        "lineNumber": 55,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  reportOnly: false,\n",
+                        "lineNumber": 56,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  loose: true,\n",
+                        "lineNumber": 57,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  setAllHeaders: true,\n",
+                        "lineNumber": 58,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "  browserSniff: false\n",
+                        "lineNumber": 59,
+                        "lineChange": "added"
+                      },
+                      {
+                        "line": "}))\n",
+                        "lineNumber": 60,
+                        "lineChange": "added"
+                      }
+                    ]
+                  }
+                ],
+                "exampleCommitDescriptions": [],
+                "precision": "very-high",
+                "repoDatasetSize": 416,
+                "cwe": [
+                  "CWE-200"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "javascript/CodeInjection",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Unsanitized input from the HTTP request body flows into eval, where it is executed as JavaScript code. This may result in a Code Injection vulnerability.",
+            "markdown": "Unsanitized input from {0} {1} into {2}, where it is executed as JavaScript code. This may result in a Code Injection vulnerability.",
+            "arguments": [
+              "[the HTTP request body](0)",
+              "[flows](1),(2),(3),(4),(5)",
+              "[eval](6)"
+            ]
+          },
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vuln-eval.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10,
+                  "endLine": 10,
+                  "startColumn": 20,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "identity": "90c0f8e1-6dd9-48cf-8471-278dcfdb6b7a",
+            "0": "a0bdd2eb1e090056f2bc36b417df036c3db49bbc489b6798cc81f971011b5cd6",
+            "1": "e0fda459.4773f344.8b18f948.93be4c77.53ad0462.8020cfdf.ea4b1c47.cde67692.f759b1f9.4773f344.aa4dda5f.08906714.fd1fa73f.8431f2ca.83265159.89d75565",
+            "snyk/asset/finding/v1": "90c0f8e1-6dd9-48cf-8471-278dcfdb6b7a"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 20,
+                            "endColumn": 24
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 1,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 20,
+                            "endColumn": 24
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 2,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 16,
+                            "endColumn": 24
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 3,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 25,
+                            "endColumn": 29
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 4,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 7,
+                            "endLine": 7,
+                            "startColumn": 9,
+                            "endColumn": 13
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 5,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 10,
+                            "endLine": 10,
+                            "startColumn": 25,
+                            "endColumn": 29
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "location": {
+                        "id": 6,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 10,
+                            "endLine": 10,
+                            "startColumn": 20,
+                            "endColumn": 24
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "isAutofixable": true,
+            "priorityScore": 850,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        },
+        {
+          "ruleId": "javascript/DisablePoweredBy",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Disable X-Powered-By header for your Express app (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
+            "markdown": "Disable X-Powered-By header for your {0} (consider using Helmet middleware), because it exposes information about the used framework to potential attackers.",
+            "arguments": [
+              "[Express app](0)"
+            ]
+          },
+          "locations": [
+            {
+              "id": 0,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "vuln-eval.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3,
+                  "endLine": 3,
+                  "startColumn": 13,
+                  "endColumn": 20
+                }
+              }
+            }
+          ],
+          "fingerprints": {
+            "snyk/asset/finding/v1": "5e7fe714-e8ce-43c8-91b9-7d57890e2844",
+            "identity": "5e7fe714-e8ce-43c8-91b9-7d57890e2844",
+            "0": "f11853d30cd2e9143640dffc671e5550a3be578b1febde0ab7fbc7fcb8220de3",
+            "1": "ae77ea27.4773f344.8b18f948.d7919eeb.a1fb1152.5fce695c.ea4b1c47.89d75565.ae77ea27.4773f344.aa4dda5f.d7919eeb.a1fb1152.5fce695c.60d372c8.89d75565"
+          },
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "id": 0,
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "vuln-eval.js",
+                            "uriBaseId": "%SRCROOT%"
+                          },
+                          "region": {
+                            "startLine": 3,
+                            "endLine": 3,
+                            "startColumn": 13,
+                            "endColumn": 20
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "isAutofixable": true,
+            "priorityScore": 600,
+            "priorityScoreFactors": [
+              {
+                "label": true,
+                "type": "hotFileSource"
+              },
+              {
+                "label": true,
+                "type": "fixExamples"
+              }
+            ]
+          }
+        }
+      ],
+      "properties": {
+        "coverage": [
+          {
+            "files": 2,
+            "isSupported": true,
+            "lang": ".js",
+            "type": "SUPPORTED"
+          }
+        ]
+      },
+      "automationDetails": {
+        "id": "Snyk/Code/2025-10-28T21:25:59Z"
+      }
+    }
+  ]
+}
